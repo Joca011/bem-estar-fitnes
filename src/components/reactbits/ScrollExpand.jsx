@@ -72,7 +72,8 @@ const ScrollExpand = ({
     const ix = Math.max(0, (100 - w) / 2);
     const iy = Math.max(0, (100 - h) / 2);
     const r = c.startRadius + (c.endRadius - c.startRadius) * e;
-    frame.style.clipPath = `inset(${iy}% ${ix}% ${iy}% ${ix}% round ${r}px)`;
+    // Totalmente aberto: sem clip-path, o vídeo vira uma camada simples e para de ser redesenhado a cada quadro
+    frame.style.clipPath = e > 0.999 ? 'none' : `inset(${iy}% ${ix}% ${iy}% ${ix}% round ${r}px)`;
 
     media.style.transform = `scale(${c.mediaZoom + (1 - c.mediaZoom) * e})`;
 

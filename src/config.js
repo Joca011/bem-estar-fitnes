@@ -52,8 +52,8 @@ export const UNITS = [
 export const MEDIA = {
   heroVideo: '/media/treino-1003.mp4',
   heroPoster: '/media/reel-1003.jpg',
-  finalVideo: '/media/treino-1006.mp4',
-  finalPoster: '/media/reel-1006.jpg',
+  finalVideo: '/media/treino-1003.mp4',
+  finalPoster: '/media/reel-1003.jpg',
   structureVideo: '/media/treino-1019.mp4',
   structurePoster: '/media/reel-1019.jpg',
   reels: [

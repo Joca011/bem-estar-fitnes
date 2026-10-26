@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useInView, useScroll, useSpring, useTransform } from 'motion/react';
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 
 import BlurText from './components/reactbits/BlurText';
@@ -93,17 +93,12 @@ const Logo = () => (
   </a>
 );
 
-// Vídeo que só toca quando aparece na tela (economiza dados no celular)
+// Vídeo de fundo com autoplay nativo. O navegador já pausa vídeos mudos fora da tela e retoma
+// quando eles aparecem; chamar pause()/play() na mão quebra isso (o play() é recusado e o vídeo congela).
 function AutoVideo({ src, poster, className = '' }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { margin: '200px' });
-  useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    if (inView) v.play().catch(() => {});
-    else v.pause();
-  }, [inView]);
-  return <video ref={ref} className={className} src={src} poster={poster} muted loop playsInline preload="none" />;
+  return (
+    <video className={className} src={src} poster={poster} autoPlay muted loop playsInline preload="metadata" />
+  );
 }
 
 /* ---------- Countdown ---------- */
@@ -195,15 +190,15 @@ function AnnounceBar() {
 function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.25]);
+  // Só desloca o vídeo (sem zoom): escalar um vídeo tocando a cada quadro é o que mais trava
+  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const update = useInauguration();
 
   return (
     <section className="hero" id="topo" ref={ref}>
-      <motion.div className="hero__media" style={{ y: videoY, scale: videoScale }}>
+      <motion.div className="hero__media" style={{ y: videoY }}>
         <video src={MEDIA.heroVideo} poster={MEDIA.heroPoster} autoPlay muted loop playsInline />
       </motion.div>
       <div className="hero__shade" />
@@ -754,25 +749,20 @@ function FloatingCta() {
   return (
     <AnimatePresence>
       {show && (
-        <>
-          <motion.a
-            href={whatsappLink(CTA_MSG)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="fab"
-            aria-label="Falar no WhatsApp"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.1 }}
-          >
-            <IconWhatsApp width={28} height={28} />
-            <span className="fab__ping" />
-          </motion.a>
-          <motion.div className="mobile-bar" initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100 }} transition={{ duration: 0.4, ease }}>
-            <CtaButton>Agendar aula grátis</CtaButton>
-          </motion.div>
-        </>
+        <motion.a
+          href={whatsappLink(CTA_MSG)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fab"
+          aria-label="Falar no WhatsApp"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          whileHover={{ scale: 1.1 }}
+        >
+          <IconWhatsApp width={28} height={28} />
+          <span className="fab__ping" />
+        </motion.a>
       )}
     </AnimatePresence>
   );
