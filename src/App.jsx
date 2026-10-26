@@ -730,7 +730,12 @@ function Footer() {
           </a>
         </div>
       </div>
-      <div className="container footer__copy">© {new Date().getFullYear()} Academia Bem Estar Fitness</div>
+      <div className="container footer__copy">
+        <span>© {new Date().getFullYear()} Academia Bem Estar Fitness. Todos os direitos reservados.</span>
+        <span>
+          Criado por <strong className="footer__credit">Overture Agência Criativa</strong>
+        </span>
+      </div>
     </footer>
   );
 }
