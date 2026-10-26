@@ -1,0 +1,3 @@
+{
+  "_como_usar": "Para trocar o aviso de um dia, adicione uma linha no formato \"AAAA-MM-DD\": \"texto\". Ele substitui a mensagem automática daquele dia. Ex.: \"2026-10-28\": \"Equipamentos novos chegando hoje!\""
+}
