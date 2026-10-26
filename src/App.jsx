@@ -334,12 +334,6 @@ function Structure() {
         <div className="structure__overlay">
           <span className="eyebrow">Inauguração · 03 de novembro · {update.badge}</span>
           <h2>{update.title}</h2>
-          <div className="daily">
-            <span className="daily__label">
-              <span className="pill__dot" /> Atualização de hoje · {update.dateLabel}
-            </span>
-            <p>{update.message}</p>
-          </div>
           {!t.done && (
             <div className="countdown">
               <TimeBox value={t.days} label="dias" />

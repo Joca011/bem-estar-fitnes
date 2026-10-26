@@ -290,35 +290,6 @@ p {
   text-decoration: underline;
 }
 
-/* Card de atualização diária dentro da seção da nova estrutura */
-.daily {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  max-width: 560px;
-  padding: 0.9rem 1.2rem;
-  border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.72);
-  border: 1px solid rgba(57, 255, 20, 0.35);
-}
-
-.daily__label {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--neon);
-}
-
-.daily p {
-  color: #e6ece6;
-  font-weight: 600;
-}
-
 .nav__links {
   display: flex;
   gap: 2rem;
